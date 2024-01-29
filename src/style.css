@@ -154,3 +154,84 @@ header img {
 }
 
 /* Navbar end */
+
+/* Main Content - Daily start */
+/* Main Content - Daily end */
+
+main {
+    margin-top: 2vh;
+}
+
+#main-content-wrapper {
+    width: 50vw;
+    margin: 0 auto;
+}
+
+#main-content-wrapper > * {
+    width: 65%;
+}
+
+#current-forecast {
+    background-color: var(--primary);
+    border-radius: 6px 6px 4px 4px;
+}
+
+#current-forecast-upper {
+    padding: 1rem 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    border-bottom: 1px solid white;
+}
+
+#current-time-text {
+    font-weight: bold;
+}
+
+#current-forecast-lower {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 1rem;
+}
+
+#current-forecast-lower-left {
+    
+    display: flex;
+}
+
+#current-forecast-temperature-text {
+    font-size: 4rem;
+    letter-spacing: -10px;
+}
+
+#current-forecast-temperature-unit {
+    font-size: 2rem;
+}
+
+
+#current-forecast-lower-right {
+    
+    width: 50%;
+    /* border: 1px solid black; */
+}
+
+#current-forecast-lower-right > * {
+    border-bottom: 1px solid white;
+}
+
+#wind-speed, 
+#wind-direction, 
+#air-quality-text {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 2rem
+}
+
+#wind-speed > p:nth-child(2), 
+#wind-direction > p:nth-child(2),
+#air-quality-text p:nth-child(2) {
+    font-weight: bold;
+}
