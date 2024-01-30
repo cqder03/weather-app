@@ -21,6 +21,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Nunito Sans";
+  scroll-behavior: smooth;
 }
 
 /* Header  start*/
@@ -139,9 +140,9 @@ header img {
   margin: 0 auto;
   display: flex;
   align-items: flex-end;
-  background-color: rgba(128, 128, 128, 0.25);
   line-height: 3.5vh;
   cursor: default;
+  color: gray;
 }
 
 #navbar-content-wrapper > * {
@@ -149,89 +150,170 @@ header img {
   padding: 0 1rem;
 }
 
-#navbar-content-wrapper .active {
+#navbar-content-wrapper .active-tab {
   border-bottom: 1px solid red;
+  color: black;
 }
 
 /* Navbar end */
 
-/* Main Content - Daily start */
-/* Main Content - Daily end */
+/* Main Content - Current forecast start */
 
 main {
-    margin-top: 2vh;
+  margin-top: 2vh;
 }
 
 #main-content-wrapper {
-    width: 50vw;
-    margin: 0 auto;
+  width: 50vw;
+  margin: 0 auto;
 }
 
 #main-content-wrapper > * {
-    width: 65%;
+  width: 65%;
 }
 
 #current-forecast {
-    background-color: var(--primary);
-    border-radius: 6px 6px 4px 4px;
+  background-color: var(--primary);
+  border-radius: 6px 6px 4px 4px;
 }
 
-#current-forecast-upper {
-    padding: 1rem 1.2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.8rem;
-    border-bottom: 1px solid white;
+#current-forecast-upper,
+#hourly-forecast-upper {
+  padding: 1rem 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 }
 
 #current-time-text {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 #current-forecast-lower {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.5rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 1rem;
 }
 
 #current-forecast-lower-left {
-    
-    display: flex;
+  display: flex;
+  align-items: center;
+}
+
+#current-forecast-lower-left-left > img {
+  height: 100px;
+  aspect-ratio: 1 / 1;
 }
 
 #current-forecast-temperature-text {
-    font-size: 4rem;
-    letter-spacing: -10px;
+  font-size: 4rem;
+  letter-spacing: -10px;
 }
 
 #current-forecast-temperature-unit {
-    font-size: 2rem;
+  font-size: 2rem;
 }
-
 
 #current-forecast-lower-right {
-    
-    width: 50%;
-    /* border: 1px solid black; */
+  width: 50%;
 }
 
-#current-forecast-lower-right > * {
-    border-bottom: 1px solid white;
+#current-forecast-lower-right > *:not(:last-child) {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 }
 
-#wind-speed, 
-#wind-direction, 
-#air-quality-text {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 2rem
+#wind-speed-n-direction,
+#wind-gust,
+#air-quality {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 2rem;
 }
 
-#wind-speed > p:nth-child(2), 
-#wind-direction > p:nth-child(2),
-#air-quality-text p:nth-child(2) {
-    font-weight: bold;
+#wind-speed-n-direction > p:nth-child(2),
+#wind-gust > p:nth-child(2),
+#air-quality p:nth-child(2) {
+  font-weight: bold;
 }
+
+/* Main Content - Current forecast end */
+
+/* Main Content Hourly forecast start */
+
+#hourly-forecast {
+  background-color: var(--primary);
+  margin-top: 1.5rem;
+  border-radius: 8px 8px 6px 6px;
+}
+
+#hourly-forecast-lower {
+  height: 11.25rem;
+  display: flex;
+}
+
+#hourly-forecast-lower > .hourly-forecast-button {
+  width: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: default;
+  user-select: none;
+}
+
+.hourly-forecast-button {
+  height: 100%;
+  background: lightblue;
+}
+
+#hourly-forecast-card-wrapper {
+  height: 100%;
+  width: 32rem;
+  display: flex;
+  overflow: hidden;
+}
+
+.hourly-forecast-card {
+  min-width: 3.89rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.hourly-forecast-card > *:not(img) {
+  width: 100%;
+}
+
+.hourly-forecast-card > img {
+  height: 40px;
+  aspect-ratio: 1 / 1;
+}
+
+.time-text,
+.temperature-text {
+  font-weight: bold;
+}
+
+.time-text,
+.temperature-text {
+  text-align: center;
+  letter-spacing: -2px;
+}
+
+.temperature-text {
+  font-size: 2rem;
+}
+
+.precipitation-chance {
+  display: flex;
+  align-items: center;
+}
+
+.precipitation-chance > img {
+  height: 25px;
+}
+/* Main Content Hourly forecast end */
