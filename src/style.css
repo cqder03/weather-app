@@ -242,7 +242,7 @@ main {
 
 /* Main Content - Current forecast end */
 
-/* Main Content Hourly forecast start */
+/* Main Content - Today's Hourly forecast start */
 
 #hourly-forecast {
   background-color: var(--primary);
@@ -316,4 +316,96 @@ main {
 .precipitation-chance > img {
   height: 25px;
 }
-/* Main Content Hourly forecast end */
+/* Main Content - Today's Hourly forecast end */
+
+/* Main Content - Hourly forecast start*/
+
+.hourly-forecast-div {
+  background-color: var(--primary);
+  padding: 1rem 0.5rem;
+  margin-bottom: 1rem;
+}
+.hourly-forecast-div > * {
+  width: 100%;
+}
+
+.hourly-forecast-upper {
+  height: 3.9rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hourly-forecast-upper-left {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.hourly-forecast-upper-left > img {
+  height: 80px;
+  aspect-ratio: 1 / 1;
+}
+
+.hourly-forecast-upper-left-date {
+  margin-right: 1rem;
+}
+
+.hourly-forecast-date,
+.hourly-forecast-time {
+  font-size: 0.8rem;
+}
+
+.hourly-forecast-time {
+  font-weight: bold;
+}
+
+.hourly-forecast-temp {
+  font-size: 2.8rem;
+}
+
+.hourly-forecast-upper-right {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+}
+
+.hourly-forecast-upper-middle {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.hourly-forecast-upper-right > img {
+  height: 25px;
+  aspect-ratio: 1 / 1;
+}
+
+.hourly-forecast-middle {
+  margin: 1rem 0;
+}
+
+.hourly-forecast-lower {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0 0.2rem;
+}
+
+.hourly-forecast-lower > * {
+  width: 48.5%;
+  height: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hourly-forecast-lower > :nth-child(1),
+.hourly-forecast-lower > :nth-child(2) {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.hourly-forecast-lower > * > :nth-child(2) {
+  font-weight: bold;
+}
+
+/* Main Content - Hourly forecast end*/

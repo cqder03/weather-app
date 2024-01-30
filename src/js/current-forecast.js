@@ -33,7 +33,7 @@ function displayCurrentTimeForecast() {
   currentForecastRealFeelPara.textContent = "RealFeel";
   currentForecastRealFeelSpan.textContent =
     "-1°"; /*Need to add object var here*/
-  windSpeedPara1.textContent = "Wind speed";
+  windSpeedPara1.textContent = "Wind";
   windSpeedPara2.textContent = "SW 11 km/h"; /*Need to add object var here*/
   windGustPara1.textContent = "Wind gust";
   windGustPara2.textContent = "25 km/h"; /*Need to add object var here*/
@@ -207,9 +207,9 @@ function displayHourlyForecast() {
     precipitationIcon.setAttribute("alt", "rain drop icon");
     precipitationPara.setAttribute("class", "precipitation-chance-text");
 
-    timePara.textContent = "11";
-    tempPara.textContent = "2°";
-    precipitationPara.textContent = "5%";
+    timePara.textContent = card.time;
+    tempPara.textContent = card.temp;
+    precipitationPara.textContent = card.precipitation;
 
     hourlyForecastCard.appendChild(timePara);
     hourlyForecastCard.appendChild(cardIcon);
