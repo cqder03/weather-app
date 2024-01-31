@@ -257,6 +257,7 @@ main {
 
 #hourly-forecast-lower > .hourly-forecast-button {
   width: 4rem;
+  font-size: 3rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -266,7 +267,7 @@ main {
 
 .hourly-forecast-button {
   height: 100%;
-  background: lightblue;
+  background: rgb(52, 62, 73);
 }
 
 #hourly-forecast-card-wrapper {
@@ -318,11 +319,11 @@ main {
 }
 /* Main Content - Today's Hourly forecast end */
 
-/* Main Content - Hourly forecast start*/
+/* Main Content - Hourly forecast start */
 
 .hourly-forecast-div {
   background-color: var(--primary);
-  padding: 1rem 0.5rem;
+  padding: 1rem 0.5rem 0 0.5rem;
   margin-bottom: 1rem;
 }
 .hourly-forecast-div > * {
@@ -364,15 +365,15 @@ main {
   font-size: 2.8rem;
 }
 
+.hourly-forecast-upper-middle {
+  display: flex;
+  gap: 0.5rem;
+}
+
 .hourly-forecast-upper-right {
   display: flex;
   align-items: center;
   font-weight: bold;
-}
-
-.hourly-forecast-upper-middle {
-  display: flex;
-  gap: 0.5rem;
 }
 
 .hourly-forecast-upper-right > img {
@@ -380,18 +381,37 @@ main {
   aspect-ratio: 1 / 1;
 }
 
+.hourly-more-option {
+  margin: 0 0.5rem;
+  font-size: 1.5rem;
+  transform: rotate(90deg);
+  user-select: none;
+}
+
+.hourly-more-option.more-option-active {
+  transform: rotate(-90deg);
+  transition: transform 0.5s;
+}
+
+.hourly-more-option:not(.more-option-active) {
+  transform: rotate(90deg);
+  transition: transform 0.5s;
+}
+
 .hourly-forecast-middle {
   margin: 1rem 0;
 }
 
-.hourly-forecast-lower {
+.hourly-forecast-lower,
+.hourly-forecast-lower-more {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding: 0 0.2rem;
+  padding: 0.4rem 0.4rem;
 }
 
-.hourly-forecast-lower > * {
+.hourly-forecast-lower > *,
+.hourly-forecast-lower-more > * {
   width: 48.5%;
   height: 2rem;
   display: flex;
@@ -400,12 +420,113 @@ main {
 }
 
 .hourly-forecast-lower > :nth-child(1),
-.hourly-forecast-lower > :nth-child(2) {
+.hourly-forecast-lower > :nth-child(2),
+.hourly-forecast-lower-more > :nth-child(1),
+.hourly-forecast-lower-more > :nth-child(2) {
   border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 }
 
-.hourly-forecast-lower > * > :nth-child(2) {
+.hourly-forecast-lower-more > :nth-child(1),
+.hourly-forecast-lower-more > :nth-child(2) {
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.hourly-forecast-lower > * > :nth-child(2),
+.hourly-forecast-lower-more > * > :nth-child(2) {
   font-weight: bold;
 }
 
-/* Main Content - Hourly forecast end*/
+.hourly-forecast-lower-more-hidden {
+  height: 0;
+  display: none;
+}
+/* Main Content - Hourly forecast end */
+
+/* Main Content - Daily forecast start */
+
+.daily-forecast-card {
+  background-color: var(--primary);
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.daily-forecast-card-upper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.daily-forecast-card-upper-left {
+  display: flex;
+  align-items: center;
+}
+
+.daily-forecast-card-date {
+  margin-right: 2rem;
+  font-size: 0.8rem;
+}
+
+.daily-forecast-week-day {
+  font-weight: bold;
+}
+
+.daily-forecast-card-upper-left > img {
+  height: 5rem;
+  aspect-ratio: 1 / 1;
+}
+
+.daily-forecast-card-temps {
+  display: flex;
+  align-items: center;
+}
+
+.daily-forecast-max-temp {
+  font-size: 3.15rem;
+}
+
+.daily-forecast-min-temp {
+  font-size: 1.5rem;
+  position: relative;
+  top: 0.4rem;
+  color: gray;
+}
+
+.daily-forecast-card-upper-right {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+}
+
+.daily-forecast-card-upper-right > img {
+  height: 25px;
+  aspect-ratio: 1 / 1;
+}
+
+.daily-forecast-card-middle {
+  margin: 1rem 0;
+}
+
+.daily-forecast-card-lower {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.daily-forecast-card-lower > * {
+  width: 45%;
+  height: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.daily-forecast-card-lower > :nth-child(1),
+.daily-forecast-card-lower > :nth-child(2) {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.daily-forecast-card-lower > * > :nth-child(2) {
+  font-weight: bold;
+}
+
+/* Main Content - Daily forecast end */

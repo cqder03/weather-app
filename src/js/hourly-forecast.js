@@ -77,6 +77,7 @@ function displayHourlyForecastDiv() {
     const hourlyForecastUpperRight = document.createElement("div");
     const hourlyForecastUpperRightIcon = document.createElement("img");
     const hourlyForecastPrecipitationPara = document.createElement("p");
+    const hourlyForecastArrowPara = document.createElement('p');
     const hourlyForecastMiddle = document.createElement("div");
     const hourlyForecastMiddlePara = document.createElement("p");
     const hourlyForecastLower = document.createElement("div");
@@ -92,6 +93,19 @@ function displayHourlyForecastDiv() {
     const hourlyForecastLowerHumidity = document.createElement("div");
     const humidityPara1 = document.createElement("p");
     const humidityPara2 = document.createElement("p");
+    const hourlyForecastLowerMore = document.createElement('div');
+    const hourlyForecastLowerMorePressure = document.createElement('div');
+    const pressurePara1 = document.createElement('p');
+    const pressurePara2 = document.createElement('p');
+    const hourlyForecastLowerMoreDewPoint = document.createElement('div');
+    const dewPointPara1 = document.createElement('p');
+    const dewPointPara2 = document.createElement('p');
+    const hourlyForecastLowerMoreVisibility = document.createElement('div');
+    const visibilityPara1 = document.createElement('p');
+    const visibilityPara2 = document.createElement('p');
+    const hourlyForecastLowerMoreCloudCover = document.createElement('div');
+    const cloudCoverPara1 = document.createElement('p');
+    const cloudCoverPara2 = document.createElement('p');
 
     hourlyForecastDiv.setAttribute("class", "hourly-forecast-div");
     hourlyForecastUpper.setAttribute("class", "hourly-forecast-upper");
@@ -124,6 +138,7 @@ function displayHourlyForecastDiv() {
       "src",
       "../src/assets/icons/precipitation_icon.png"
     );
+    hourlyForecastArrowPara.setAttribute('class', 'hourly-more-option');
     hourlyForecastUpperRightIcon.setAttribute("alt", "water drop icon");
     hourlyForecastPrecipitationPara.setAttribute(
       "class",
@@ -140,12 +155,32 @@ function displayHourlyForecastDiv() {
     airQualityPara2.setAttribute("class", "hourly-air-quality-text");
     hourlyForecastLowerHumidity.setAttribute("class", "hourly-humidity");
     humidityPara2.setAttribute("class", "hourly-humidity-text");
+    hourlyForecastLowerMore.setAttribute('class', 'hourly-forecast-lower-more hourly-forecast-lower-more-hidden');
+    hourlyForecastLowerMorePressure.setAttribute('class', 'hourly-forecast-pressure');
+    pressurePara2.setAttribute('class', 'hourly-forecast-pressure-text');
+    hourlyForecastLowerMoreDewPoint.setAttribute('class', 'hourly-forecast-dew-point');
+    dewPointPara2.setAttribute('class', 'hourly-forecast-dew-point-text');
+    hourlyForecastLowerMoreVisibility.setAttribute('class', 'hourly-forecast-visibility');
+    visibilityPara2.setAttribute('class', 'hourly-forecast-visibility-text');
+    hourlyForecastLowerMoreCloudCover.setAttribute('class', 'hourly-forecast-cloud-cover');
+    cloudCoverPara2.setAttribute('class', 'hourly-forecast-cloud-text');
+    hourlyForecastArrowPara.addEventListener('click', () => {
+        if (hourlyForecastArrowPara.getAttribute('class').includes('more-option-active')) {
+            hourlyForecastArrowPara.classList.remove('more-option-active');
+            hourlyForecastLowerMore.classList.add('hourly-forecast-lower-more-hidden');
+        } else {
+            hourlyForecastArrowPara.classList.add('more-option-active');
+            hourlyForecastLowerMore.classList.remove('hourly-forecast-lower-more-hidden');
+        }
+    });
+
 
     hourlyForecastDatePara.textContent = dataPoint.date;
     hourlyForecastTimePara.textContent = dataPoint.time;
     hourlyForecastTempPara.textContent = dataPoint.temp;
     hourlyForecastUpperMiddlePara.textContent = "ReelFeel";
     hourlyForecastUpperMiddleTempPara.textContent = dataPoint.reelfeeltemp;
+    hourlyForecastArrowPara.textContent = '›';
     hourlyForecastPrecipitationPara.textContent = "0%";
     hourlyForecastMiddlePara.textContent = "Overcast";
     windSpeedPara1.textContent = "Wind";
@@ -156,6 +191,14 @@ function displayHourlyForecastDiv() {
     airQualityPara2.textContent = dataPoint.airQuality;
     humidityPara1.textContent = "Humidity";
     humidityPara2.textContent = dataPoint.humidity;
+    pressurePara1.textContent = 'Pressure';
+    pressurePara2.textContent = '1005mb';
+    dewPointPara1.textContent = 'Dew point';
+    dewPointPara2.textContent = '6°';
+    visibilityPara1.textContent = 'Visibility';
+    visibilityPara2.textContent = '10 km';
+    cloudCoverPara1.textContent = 'Cloud cover';
+    cloudCoverPara2.textContent = '51%';
 
     hourlyForecastDiv.appendChild(hourlyForecastUpper);
     hourlyForecastUpper.appendChild(hourlyForecastUpperLeft);
@@ -170,6 +213,7 @@ function displayHourlyForecastDiv() {
     hourlyForecastUpper.appendChild(hourlyForecastUpperRight);
     hourlyForecastUpperRight.appendChild(hourlyForecastUpperRightIcon);
     hourlyForecastUpperRight.appendChild(hourlyForecastPrecipitationPara);
+    hourlyForecastUpperRight.appendChild(hourlyForecastArrowPara);
     hourlyForecastDiv.appendChild(hourlyForecastMiddle);
     hourlyForecastMiddle.appendChild(hourlyForecastMiddlePara);
     hourlyForecastDiv.appendChild(hourlyForecastLower);
@@ -185,6 +229,20 @@ function displayHourlyForecastDiv() {
     hourlyForecastLower.appendChild(hourlyForecastLowerHumidity);
     hourlyForecastLowerHumidity.appendChild(humidityPara1);
     hourlyForecastLowerHumidity.appendChild(humidityPara2);
+    hourlyForecastDiv.appendChild(hourlyForecastLowerMore);
+    hourlyForecastLowerMore.appendChild(hourlyForecastLowerMorePressure);
+    hourlyForecastLowerMorePressure.appendChild(pressurePara1);
+    hourlyForecastLowerMorePressure.appendChild(pressurePara2);
+    hourlyForecastLowerMore.appendChild(hourlyForecastLowerMoreDewPoint);
+    hourlyForecastLowerMoreDewPoint.appendChild(dewPointPara1);
+    hourlyForecastLowerMoreDewPoint.appendChild(dewPointPara2);
+    hourlyForecastLowerMore.appendChild(hourlyForecastLowerMoreVisibility);
+    hourlyForecastLowerMoreVisibility.appendChild(visibilityPara1);
+    hourlyForecastLowerMoreVisibility.appendChild(visibilityPara2);
+    hourlyForecastLowerMore.appendChild(hourlyForecastLowerMoreCloudCover);
+    hourlyForecastLowerMoreCloudCover.appendChild(cloudCoverPara1);
+    hourlyForecastLowerMoreCloudCover.appendChild(cloudCoverPara2);
+
     document
       .querySelector("#main-content-wrapper")
       .appendChild(hourlyForecastDiv);
