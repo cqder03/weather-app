@@ -530,3 +530,148 @@ main {
 }
 
 /* Main Content - Daily forecast end */
+
+/* Main Content - Air quality start */
+
+.current-air-quality {
+  background-color: var(--primary);
+}
+
+.current-air-quality-upper {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  padding: 0.5rem;
+}
+
+.current-air-quality-lower {
+  padding: 0.5rem;
+}
+
+.current-day {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.current-date {
+  font-size: 0.9rem;
+}
+
+.current-air-quality-lower-top {
+  margin-bottom: 1rem;
+}
+
+.current-air-quality-lower-bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.current-air-quality-lower-bottom-left {
+  min-width: 11.25rem;
+  aspect-ratio: 1 / 1;
+  border: 1px solid black;
+  margin-right: 1.25rem;
+}
+
+.current-air-quality-lower-right {
+  padding-left: 0.5rem;
+}
+
+.air-quality-excellent {
+  background-color: rgb(29, 207, 255);
+}
+
+.air-quality-fair {
+  background-color: rgb(67, 211, 87);
+}
+
+.air-quality-poor {
+  background-color: rgb(253, 184, 13);
+}
+
+.air-quality-unhealthy {
+  background-color: rgb(233, 54, 90);
+}
+
+.air-quality-very-unhealthy {
+  background-color: rgb(168, 41, 212);
+}
+
+.air-quality-dangerous {
+  background-color: rgb(106, 10, 255);
+}
+
+.current-air-quality-mark {
+  height: 0.2rem;
+  width: 2rem;
+  margin: 0.8rem 0;
+}
+
+.current-air-quality-text {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.current-air-quality-description {
+  font-size: 0.8rem;
+  line-height: 0.9rem;
+}
+
+.current-air-quality-more {
+  background-color: var(--primary);
+  margin-top: 1.5rem;
+}
+
+.current-air-quality-more-upper {
+  height: 3rem;
+  padding: 0 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-bottom: 1px solid gray;
+}
+
+.current-air-quality-caption {
+  width: 53%;
+  text-align: right;
+}
+
+.pollutant-card {
+  padding: 0.5rem 1rem;
+  display: flex;
+}
+
+.pollutant-card-left {
+  min-width: 20%;
+  margin-right: 0.5rem;
+}
+
+.pollutant-para1 > sub {
+  font-size: 0.6rem
+}
+
+.pollutant-mark {
+  height: 0.2rem;
+  width: 2rem;
+  margin: 0.5rem 0;
+}
+
+.pollutant-para2 {
+  font-weight: bold;
+}
+
+.pollutant-card-middle {
+  font-size: 0.875rem;
+}
+
+.pollutant-card-right {
+  min-width: 20%;
+  text-align: right;
+}
+
+.pollutant-score2 {
+  font-size: 0.8rem;
+}
+
+
+
+/* Main Content - Air quality end */
