@@ -565,10 +565,48 @@ main {
 }
 
 .current-air-quality-lower-bottom-left {
-  min-width: 11.25rem;
+  min-width: 200px;
   aspect-ratio: 1 / 1;
-  border: 1px solid black;
   margin-right: 1.25rem;
+  position: relative;
+}
+
+.pollutant-score-display {
+  width: 200px;
+  height: 200px;
+  border: 1px solid transparent;
+  position: relative;
+  border-radius: 50%;
+  background-color: purple;
+}
+
+.pollutant-score-display::before {
+  content: '';
+  width: 150px;
+  height: 150px;
+  display: block;
+  position: absolute;
+  top: 23.5px;
+  left: 23.5px;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  background-color: var(--primary);
+}
+
+.pollutant-score {
+  font-size: 1.5rem;
+  color: white;
+  position: absolute;
+  top: 75px;
+  left: 78px;
+}
+
+.pollutant-caption {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, .5);
+  position: absolute;
+  top: 100px;
+  left: 90px;
 }
 
 .current-air-quality-lower-right {
@@ -616,6 +654,9 @@ main {
   line-height: 0.9rem;
 }
 
+/* Main Content - Air quality end */
+/* Main Content - Air quality more start*/
+
 .current-air-quality-more {
   background-color: var(--primary);
   margin-top: 1.5rem;
@@ -625,19 +666,40 @@ main {
   height: 3rem;
   padding: 0 0.5rem;
   display: flex;
-  align-items: center;
   gap: 1rem;
   border-bottom: 1px solid gray;
 }
 
+.current-air-quality-more-upper > * {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  user-select: none;
+}
+
+.current-air-quality-more-upper > *:not(:last-child) {
+  cursor: grab;
+}
+
+.current-pollutants, 
+.air-quality-scale {
+  color: gray;
+}
+
+.current-active-tab {
+  color: black;
+  border-bottom: 1px solid white;
+}
+
 .current-air-quality-caption {
   width: 53%;
-  text-align: right;
+  justify-content: flex-end;
 }
 
 .pollutant-card {
   padding: 0.5rem 1rem;
   display: flex;
+  border-bottom: 1px solid gray;
 }
 
 .pollutant-card-left {
@@ -652,7 +714,7 @@ main {
 .pollutant-mark {
   height: 0.2rem;
   width: 2rem;
-  margin: 0.5rem 0;
+  margin: 0.5rem 0 0.2rem;
 }
 
 .pollutant-para2 {
@@ -672,6 +734,23 @@ main {
   font-size: 0.8rem;
 }
 
+.scale-card {
+  border-bottom: 1px solid gray;
+  padding: 0.5rem;
+}
 
+.scale-card-upper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
 
-/* Main Content - Air quality end */
+.scale-card-upper-right {
+  min-width: 20%;
+  text-align: right;
+}
+
+.scale-card-lower {
+  font-size: 0.8rem;
+}
+/* Main Content - Air quality more end*/
