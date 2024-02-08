@@ -1,7 +1,11 @@
+import { displayAirQuality, displayAirQualityMore } from "./air-quality";
 import {
   displayCurrentTimeForecast,
   displayHourlyForecast,
 } from "./current-forecast";
+import { displayDailyForecastDiv } from "./daily-forecast";
+import { forecastData, locationData, returnIconLink } from "./dataStorage";
+import { displayHourlyForecastDiv } from "./hourly-forecast";
 
 function activeTabFunction(id) {
   const listOfTabs = document.querySelectorAll("#navbar-content-wrapper > *");
@@ -14,19 +18,22 @@ function activeTabFunction(id) {
       clearMainContent();
       displayCurrentTimeForecast();
       displayHourlyForecast();
-      console.log(id);
       break;
     case "hourly":
       document.querySelector(`#${id}`).classList.add("active-tab");
       clearMainContent();
+      displayHourlyForecastDiv();
       break;
     case "daily":
       document.querySelector(`#${id}`).classList.add("active-tab");
       clearMainContent();
+      displayDailyForecastDiv();
       break;
     case "air-quality":
       document.querySelector(`#${id}`).classList.add("active-tab");
       clearMainContent();
+      displayAirQuality();
+      displayAirQualityMore();
       break;
   }
 }
@@ -42,14 +49,15 @@ function themeAndTemperatureSwitch(id) {
         themeIconSelector.setAttribute("class", "dark-theme");
         themeIconSelector.setAttribute(
           "src",
-          "../src/assets/icons/theme-icons/dark.png"
+          "./assets/icons/theme-icons/dark.png"
         );
+        
         document.body.setAttribute("class", "dark");
       } else {
         themeIconSelector.setAttribute("class", "light-theme");
         themeIconSelector.setAttribute(
           "src",
-          "../src/assets/icons/theme-icons/light.png"
+          "./assets/icons/theme-icons/light.png"
         );
         document.body.setAttribute("class", "light");
       }
@@ -63,20 +71,46 @@ function themeAndTemperatureSwitch(id) {
         temperatureUnitIconSelector.getAttribute("class");
 
       if (temperatureUnitIconSelectorClass === "celcius-unit") {
-        temperatureUnitIconSelector.setAttribute("class", "fehrenheir-unit");
+        temperatureUnitIconSelector.setAttribute("class", "fahrenheit-unit");
         temperatureUnitIconSelector.setAttribute(
           "src",
-          "../src/assets/icons/temperature-units-icons/fehrenheit-icon.png"
+          "./assets/icons/temperature-units-icons/fehrenheit-icon.png"
         );
+        forecastData.setUnit('f');
       } else {
         temperatureUnitIconSelector.setAttribute("class", "celcius-unit");
         temperatureUnitIconSelector.setAttribute(
           "src",
-          "../src/assets/icons/temperature-units-icons/celcius-icon.png"
-        );
-      }
-      break;
+          "./assets/icons/temperature-units-icons/celcius-icon.png"
+          );
+          forecastData.setUnit('c');
+        }
+        updateHeader();
+        break;
   }
+}
+
+function updateHeader() {
+  const temperatureSelector = document.querySelector('#location-holder-temperature');
+  const temperatureUnitSelector = document.querySelector('#header-temperature-type');
+  const iconSelecor = document.querySelector("#location-holder > img");
+
+  setHeaderLocation(`${forecastData.getForecast().location.name}, ${forecastData.getForecast().location.country}`);
+
+  if (forecastData.getUnit() === 'c') {
+    temperatureSelector.textContent = `${forecastData.getForecast().current.temp_c}°`;
+    temperatureUnitSelector.textContent = 'c';
+  } else if (forecastData.getUnit() === 'f') {
+    temperatureSelector.textContent = `${forecastData.getForecast().current.temp_f}°`;
+    temperatureUnitSelector.textContent = 'f';
+  }
+
+  iconSelecor.setAttribute('src' , `${returnIconLink(forecastData.getForecast().current.condition.icon)}`);
+}
+
+function setHeaderLocation(name) {
+  const locationSelector = document.querySelector('#location-holder-text');
+  locationSelector.textContent = name;
 }
 
 function clearMainContent() {
@@ -89,4 +123,4 @@ function clearMainContent() {
   );
 }
 
-export { themeAndTemperatureSwitch, activeTabFunction };
+export { themeAndTemperatureSwitch, activeTabFunction, setHeaderLocation, updateHeader };
