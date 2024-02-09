@@ -1,4 +1,8 @@
+import { forecastData } from "./dataStorage";
+import { returnIconLink } from "./dataStorage";
+
 function displayCurrentTimeForecast() {
+ 
   const currentForecast = document.createElement("div");
   const currentForecastUpper = document.createElement("div");
   const currentForecastUpperPara1 = document.createElement("p");
@@ -24,21 +28,74 @@ function displayCurrentTimeForecast() {
   const airQualityPara2 = document.createElement("p");
 
   currentForecastUpperPara1.textContent = "CURRENT TIME";
-  currentForecastUpperPara2.textContent =
-    "99:99"; /*Need to add object var here*/
-  currentForecastTemperaturePara.textContent =
-    "5°"; /*Need to add object var here*/
-  currentForecastTemperatureUnit.textContent =
-    "c"; /*Need to add object var here*/
+  currentForecastUpperPara2.textContent = forecastData.getForecast().location.localtime.slice(-5);
   currentForecastRealFeelPara.textContent = "RealFeel";
-  currentForecastRealFeelSpan.textContent =
-    "-1°"; /*Need to add object var here*/
   windSpeedPara1.textContent = "Wind";
-  windSpeedPara2.textContent = "SW 11 km/h"; /*Need to add object var here*/
   windGustPara1.textContent = "Wind gust";
-  windGustPara2.textContent = "25 km/h"; /*Need to add object var here*/
   airQualityPara1.textContent = "Air quality";
-  airQualityPara2.textContent = "Poor"; /*Need to add object var here*/
+  airQualityPara2.textContent = "Poor"; 
+
+  if (forecastData.getUnit() ==='c') {
+    let temp = forecastData.getForecast().current.temp_c.toString();
+      if (temp.slice(0, 2).startsWith('-0')) {
+        currentForecastTemperaturePara.textContent = temp.slice(0, -2).replace('-', '') + '°';
+      }
+      else if (temp.includes('.')) {
+        currentForecastTemperaturePara.textContent = temp.slice(0, -2) + '°';
+      } else {
+        currentForecastTemperaturePara.textContent = temp + '°';
+      }
+    currentForecastTemperatureUnit.textContent = 'c'
+    let temp2 = forecastData.getForecast().current.feelslike_c.toString();
+    if (temp2.slice(0, 2).startsWith('-0')) {
+      currentForecastRealFeelSpan.textContent = temp2.slice(0, -2).replace('-', '') + '°';
+    }
+    else if (temp2.includes('.')) {
+      currentForecastRealFeelSpan.textContent = temp2.slice(0, -2) + '°';
+    } else {
+      currentForecastRealFeelSpan.textContent = temp2 + '°';
+    }
+    if (forecastData.getForecast().current.wind_kph.toString().includes('.')) {
+    windSpeedPara2.textContent = `${forecastData.getForecast().current.wind_dir} ${forecastData.getForecast().current.wind_kph.toString().slice(0, -2)} km/h`;
+    } else {
+      windSpeedPara2.textContent = `${forecastData.getForecast().current.wind_dir} ${forecastData.getForecast().current.wind_kph.toString()} km/h`;
+    }
+    if (forecastData.getForecast().current.gust_kph.toString().includes('.')) {
+      windGustPara2.textContent = `${forecastData.getForecast().current.gust_kph.toString().slice(0, -2)} km/h`;
+      } else {
+      windGustPara2.textContent = `${forecastData.getForecast().current.gust_kph.toString().slice(0, -2)} km/h`;
+      }
+  } else if (forecastData.getUnit === 'f') {
+    let temp = forecastData.getForecast().current.temp_f.toString();
+    if (temp.slice(0, 2).startsWith('-0')) {
+      currentForecastTemperaturePara.textContent = temp.slice(0, -2).replace('-', '') + '°';
+    }
+    else if (temp.includes('.')) {
+      currentForecastTemperaturePara.textContent = temp.slice(0, -2) + '°';
+    } else {
+      currentForecastTemperaturePara.textContent = temp + '°';
+    }
+  currentForecastTemperatureUnit.textContent = 'f'
+  let temp2 = forecastData.getForecast().current.feelslike_f.toString();
+  if (temp2.slice(0, 2).startsWith('-0')) {
+    currentForecastRealFeelSpan.textContent = temp2.slice(0, -2).replace('-', '') + '°';
+  }
+  else if (temp2.includes('.')) {
+    currentForecastRealFeelSpan.textContent = temp2.slice(0, -2) + '°';
+  } else {
+    currentForecastRealFeelSpan.textContent = temp2 + '°';
+  }
+  if (forecastData.getForecast().current.wind_mph.toString().includes('.')) {
+  windSpeedPara2.textContent = `${forecastData.getForecast().current.wind_dir} ${forecastData.getForecast().current.wind_mph.toString().slice(0, -2)} km/h`;
+  } else {
+    windSpeedPara2.textContent = `${forecastData.getForecast().current.wind_dir} ${forecastData.getForecast().current.wind_mph.toString()} km/h`;
+  }
+  if (forecastData.getForecast().current.gust_mph.toString().includes('.')) {
+    windGustPara2.textContent = `${forecastData.getForecast().current.gust_mph.toString().slice(0, -2)} mp/h`;
+    } else {
+    windGustPara2.textContent = `${forecastData.getForecast().current.gust_mph.toString().slice(0, -2)} mp/h`;
+    }
+  }
 
   currentForecast.setAttribute("id", "current-forecast");
   currentForecastUpper.setAttribute("id", "current-forecast-upper");
@@ -72,7 +129,7 @@ function displayCurrentTimeForecast() {
   currentForecastAirQuality.setAttribute("id", "air-quality");
   currentForecastIcon.setAttribute(
     "src",
-    "../src/assets/icons/weather-icons/template.png"
+    "./assets/icons/weather-icons/template.png"
   );
   currentForecastIcon.setAttribute("alt", "current weather icon");
 
@@ -121,68 +178,13 @@ function displayHourlyForecast() {
   hourlyForecastButtonRight.setAttribute("class", "hourly-forecast-button");
 
   hourlyForecastUpperPara.textContent = "HOURLY FORECAST";
-  hourlyForecastButtonLeft.textContent = "←";
-  hourlyForecastButtonRight.textContent = "→";
-
-  const templateData = [
-    {
-      time: "11",
-      temp: "2°",
-      precipitation: "5%",
-    },
-    {
-      time: "11",
-      temp: "2°",
-      precipitation: "5%",
-    },
-    {
-      time: "11",
-      temp: "2°",
-      precipitation: "5%",
-    },
-    {
-      time: "11",
-      temp: "2°",
-      precipitation: "5%",
-    },
-    {
-      time: "11",
-      temp: "2°",
-      precipitation: "5%",
-    },
-    {
-      time: "11",
-      temp: "2°",
-      precipitation: "5%",
-    },
-    {
-      time: "11",
-      temp: "2°",
-      precipitation: "5%",
-    },
-    {
-      time: "11",
-      temp: "2°",
-      precipitation: "5%",
-    },
-    {
-      time: "11",
-      temp: "2°",
-      precipitation: "5%",
-    },
-    {
-      time: "11",
-      temp: "2°",
-      precipitation: "5%",
-    },
-    {
-      time: "11",
-      temp: "2°",
-      precipitation: "5%",
-    },
-  ];
-
-  for (let card of templateData) {
+  hourlyForecastButtonLeft.textContent = "‹";
+  hourlyForecastButtonRight.textContent = "›";
+  const currentHourly = forecastData.getForecast().forecast.forecastday[0].hour;
+  let hours = forecastData.getForecast().location.localtime.slice(-5, -3).toString();
+  
+  for (let i = hours-- ; i < 24; i++) {
+    let currentHour = currentHourly[i];
     const hourlyForecastCard = document.createElement("div");
     const timePara = document.createElement("p");
     const cardIcon = document.createElement("img");
@@ -194,22 +196,41 @@ function displayHourlyForecast() {
     hourlyForecastCard.setAttribute("class", "hourly-forecast-card");
     timePara.setAttribute("class", "time-text");
     cardIcon.setAttribute(
-      "src",
-      "../src/assets/icons/weather-icons/template.png"
-    );
+      "src", `${returnIconLink(currentHour.condition.icon)}`);
     cardIcon.setAttribute("alt", "current weather icon");
     tempPara.setAttribute("class", "temperature-text");
     precipitationChance.setAttribute("class", "precipitation-chance");
     precipitationIcon.setAttribute(
       "src",
-      "../src/assets/icons/precipitation_icon.png"
+      "./assets/icons/precipitation_icon.png"
     );
     precipitationIcon.setAttribute("alt", "rain drop icon");
     precipitationPara.setAttribute("class", "precipitation-chance-text");
 
-    timePara.textContent = card.time;
-    tempPara.textContent = card.temp;
-    precipitationPara.textContent = card.precipitation;
+    timePara.textContent = currentHour.time.slice(-6, -3);
+    precipitationPara.textContent = currentHour.will_it_rain + '%';  
+    
+    if (forecastData.getUnit() ==='c') {
+      let temp = currentHour.temp_c.toString()
+      if (temp.slice(0, 2).startsWith('-0')) {
+        tempPara.textContent = temp.slice(0, -2).replace('-', '');
+      }
+      else if (temp.includes('.')) {
+        tempPara.textContent = temp.slice(0, -2);
+      } else {
+        tempPara.textContent = temp;
+      }
+    } else if (forecastData.getUnit === 'f') {
+      let temp = currentHour.temp_f.toString()
+      if (temp.slice(0, 2).startsWith('-0')) {
+        tempPara.textContent = temp.slice(0, -2).replace('-', '');
+      }
+      else if (temp.includes('.')) {
+        tempPara.textContent = temp.slice(0, -2);
+      } else {
+        tempPara.textContent = temp;
+      }
+    }
 
     hourlyForecastCard.appendChild(timePara);
     hourlyForecastCard.appendChild(cardIcon);
@@ -227,6 +248,23 @@ function displayHourlyForecast() {
   hourlyForecastLower.appendChild(hourlyForecastCardWrapper);
   hourlyForecastLower.appendChild(hourlyForecastButtonRight);
   document.querySelector("#main-content-wrapper").appendChild(hourlyForecast);
+
+  document
+  .querySelector("#hourly-forecast-lower")
+  .addEventListener("click", (event) => {
+    const eventId = event.target.id;
+    const forecastCardWrapper = document.querySelector(
+      "#hourly-forecast-card-wrapper"
+    );
+
+    switch (eventId) {
+      case "hourly-forecast-left-button":
+        forecastCardWrapper.scrollLeft -= 62.25;
+        break;
+      case "hourly-forecast-right-button":
+        forecastCardWrapper.scrollLeft += 62.25;
+    }
+  });
 }
 
 export { displayCurrentTimeForecast, displayHourlyForecast };

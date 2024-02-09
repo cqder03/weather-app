@@ -1,4 +1,29 @@
-import { activeTabFunction, themeAndTemperatureSwitch } from "./header";
+import { activeTabFunction, setHeaderLocation, themeAndTemperatureSwitch, updateHeader } from "./header";
+import { forecastData, locationData } from "./dataStorage";
+
+window.addEventListener('load',  async () => {
+  locationData.checkLocation();
+  let data = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=3eb2423f34a24d7fbdd190934242601&q=${locationData.locationName()}&days=3&aqi=yes&alerts=no`, {mode: 'cors'});
+  let convertedData = await data.json();
+  forecastData.setForecast(convertedData);
+  updateHeader();
+  activeTabFunction("today");
+  console.log(forecastData.getForecast());
+});
+
+document.querySelector('#search-location').addEventListener('keypress', (event) => {
+  const inputField = document.querySelector('#search-location');
+  if (event.key === 'Enter') {
+    if (inputField.value === '') {
+      alert('You can\'t enter empty field');
+      inputField.value = '';
+    } else {
+      locationData.setLocationName(inputField.value);
+      setHeaderLocation(inputField.value);
+      inputField.value = '';
+    }
+  }
+});
 
 document
   .querySelector("#header-content-right-wrapper")
@@ -10,25 +35,5 @@ document
   .querySelector("#navbar-content-wrapper")
   .addEventListener("click", (event) => {
     activeTabFunction(event.target.id);
-    console.log(event.target.id);
   });
 
-activeTabFunction("today");
-
-document
-  .querySelector("#hourly-forecast-lower")
-  .addEventListener("click", (event) => {
-    const eventId = event.target.id;
-    const forecastCardWrapper = document.querySelector(
-      "#hourly-forecast-card-wrapper"
-    );
-
-    switch (eventId) {
-      case "hourly-forecast-left-button":
-        forecastCardWrapper.scrollLeft -= 62.25;
-        console.log(forecastCardWrapper.scroll);
-        break;
-      case "hourly-forecast-right-button":
-        forecastCardWrapper.scrollLeft += 62.25;
-    }
-  });
